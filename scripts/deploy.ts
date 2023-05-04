@@ -1,4 +1,5 @@
 import { ethers } from "hardhat";
+const hre = require("hardhat");
 
 async function main() {
   const currentTimestampInSeconds = Math.round(Date.now() / 1000);
@@ -11,10 +12,18 @@ async function main() {
   const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
 
   await lock.deployed();
+  await lock.deployTransaction.wait(6)
+  await verify(lock.address,[unlockTime,{value:lockedAmount}])
 
   console.log(`Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`);
 }
 
+async function verify(contractAddress: any,constructArgs: any){
+  await hre.run("verify:verify", {
+    address: contractAddress,
+    constructorArguments:constructArgs
+  });
+}
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
 main().catch((error) => {
