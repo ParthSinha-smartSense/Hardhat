@@ -21,3 +21,9 @@ npx hardhat run scripts/deploy.ts
 3 npx hardhat --network networkName - To select network
 
 4 npx hh compile  - compile the contract
+
+5 npx hh console - open hh console
+
+6 npx hh test (optional add path of test file)
+
+7 npx hh run "path to script"
