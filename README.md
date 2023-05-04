@@ -18,3 +18,4 @@ npx hardhat run scripts/deploy.ts
 
 2 npx hardhat node - To start node
 
+3 npx hardhat --network networkName - To select network
